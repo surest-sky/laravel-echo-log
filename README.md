@@ -81,5 +81,5 @@
     
 ## 日志查看截图
 
-![图片描述...](https//cdn.surest.cn/FnNs0xEu7mBBsFU4CPk7MaO9i0MX)
+![图片描述...](https://cdn.surest.cn/FnNs0xEu7mBBsFU4CPk7MaO9i0MX)
 
