@@ -47,7 +47,9 @@
 
     Surest\SimpleLog\Middlewares\SimpleMiddleware::class
     
-    example：
+---
+
+    例子：
     
         use Surest\SimpleLog\Middlewares\SimpleMiddleware;
         
