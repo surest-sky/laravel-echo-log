@@ -81,7 +81,7 @@ class Logging
         $logger = self::getMlogger($name,
             null,
             Arr::get($zlog, 'log.maxFiles'),
-            "$prefix{filename}_{date}",
+            "$prefix{filename}-{date}",
             Arr::get($zlog, 'log.maxFiles')
         );
         return $logger;
