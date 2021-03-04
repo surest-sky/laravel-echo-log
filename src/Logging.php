@@ -42,7 +42,7 @@ class Logging
      * @return MLogger
      * @throws InvalidArgumentException
      */
-    public static function getMLogger($filename, $dirname, $maxFiles = 3, $filenameFormat = '{filename}_{date}', $level = Mlogger::INFO, $dataFormat = 'Y-m-d')
+    public static function getMLogger($filename, $dirname, $maxFiles = 3, $filenameFormat = '{filename}-{date}', $level = Mlogger::INFO, $dataFormat = 'Y-m-d')
     {
         if ((!is_string($filename)) || (strlen($filename) <= 0)) {
             throw new InvalidArgumentException('\$filename cannot be empty');
