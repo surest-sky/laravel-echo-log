@@ -13,5 +13,6 @@ return  [
         'maxFiles'   => env('ZLOG_REQUEST_MAX_FILES', 3),
         'samplingPr' => env('ZLOG_REQUEST_SAMPLING_PR', 1),
     ],
-    'request_on' => env('ZLOG_REQUEST_ON', 'enable')
+    'request_on' => env('ZLOG_REQUEST_ON', 'enable'),
+    'prefix' => 'biz-' // 日志文件前缀：可用来匹配es日志
 ];

@@ -12,13 +12,13 @@ use Illuminate\Support\Str;
 use Monolog\Formatter\JsonFormatter;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
+use Monolog\Logger;
+use Monolog\Logger as MLogger;
 use Monolog\Logger as MLogger;
 use Monolog\Processor\PsrLogMessageProcessor;
 use Surest\SimpleLog\Logger\RequestLogger;
 
-/**
- * @method static Surest\SimpleLog\Logger\RequestLogger getZLogger()
- */
+
 class Logging
 {
     static $instance = null;
@@ -77,10 +77,11 @@ class Logging
     public static function getZLogger($name = 'default') :Logger
     {
         $zlog = config('zlog');
+        $prefix = Arr::get($zlog, 'prefix', 'biz-');
         $logger = self::getMlogger($name,
             null,
             Arr::get($zlog, 'log.maxFiles'),
-            "biz-{filename}_{date}",
+            "$prefix{filename}_{date}",
             Arr::get($zlog, 'log.maxFiles')
         );
         return $logger;

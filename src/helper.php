@@ -247,3 +247,22 @@ if (!function_exists('getRunTime')) {
         return $end_at - $start_at;
     }
 }
+
+
+if (!function_exists("ExectionReport")) {
+    /**
+     * 报错返回
+     * User: surest
+     * Date: 2020/6/5
+     */
+    function ExectionReport(\Exception $exception): array
+    {
+        return [
+            "message" => $exception->getMessage(),
+            'line' => $exception->getLine(),
+            'file' => $exception->getFile(),
+            'trace' => json_encode($exception->getTrace()),
+            'code' => $exception->getCode(),
+        ];
+    }
+}

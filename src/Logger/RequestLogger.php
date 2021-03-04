@@ -61,6 +61,6 @@ class RequestLogger
         $record->server_port    = getServerPort();
         $record->client_ip      = getClientIp();
 
-        config('zlog.enable') && $this->mlogger->info('request-all', (array)$record);
+        config('zlog.enable') && $this->mlogger->info('request', (array)$record);
     }
 }
