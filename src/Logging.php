@@ -77,6 +77,7 @@ class Logging
     public static function getZLogger($name = 'default') :Logger
     {
         $zlog = config('zlog');
+        $name = is_cli() ? "cli_{$name}" : $name;
         $prefix = Arr::get($zlog, 'prefix', 'biz-');
         $logger = self::getMlogger($name,
             null,
