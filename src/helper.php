@@ -7,6 +7,7 @@
  */
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Surest\SimpleLog\Logging;
 
 if (!function_exists('getCurrentRequest')) {
@@ -264,5 +265,18 @@ if (!function_exists("ExectionReport")) {
             'trace' => json_encode($exception->getTrace()),
             'code' => $exception->getCode(),
         ];
+    }
+}
+
+if (!function_exists('getLoggerFile')) {
+    function getLoggerFile($name)
+    {
+        $name = is_cli() ? "cli-{$name}" : $name;
+        $zlog = config('zlog');
+        $prefix = Arr::get($zlog, 'prefix', 'biz-');
+        $name = $prefix . $name;
+        $name = $name . "-" .date("Y-m-d") . ".log";
+        $name = Arr::get($zlog, 'path') . "/" . $name;
+        return $name;
     }
 }
