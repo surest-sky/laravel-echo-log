@@ -7,9 +7,9 @@
  */
 namespace Surest\SimpleLog;
 
-use Tymon\JWTAuth\Providers\AbstractServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
-class ConfigProvider  extends AbstractServiceProvider
+class ConfigProvider  extends ServiceProvider
 {
     public function boot()
     {
