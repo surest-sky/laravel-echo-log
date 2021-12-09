@@ -1,0 +1,66 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: surestdeng
+ * Date: 2020/3/15
+ * Time: 15:33:40
+ */
+namespace Surest\SimpleLog\Logger;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Surest\SimpleLog\Constants;
+use Surest\SimpleLog\InvalidArgumentException;
+use Surest\SimpleLog\Logging;
+
+class RequestLogger
+{
+    private $path;
+
+    private $maxFiles;
+
+    private $moduleName;
+
+    private $mlogger;
+
+    private $config;
+
+    /**
+     * RequestLogger constructor.
+     *
+     * @param $config
+     *
+     * @throws InvalidArgumentException
+     */
+    public function __construct($config)
+    {
+        $this->path       = $config['path'];
+        $this->maxFiles   = $config['maxFiles'] ?? 2;
+        $this->mlogger    = (new Logging())->getMLogger(Constants::T_REQUEST, 0, $this->maxFiles);
+        $this->config = $config;
+    }
+
+    /**
+     * 上报
+     *
+     * @param Request   $request
+     * @param Response  $response
+     * @param array     $extra
+     */
+    public function zreport($request, $response = null, array $extra = [])
+    {
+        $record                 = new \stdClass();
+        $record->log_at         = nowToEsTime();
+        $record->target_url     = getTargetUrl($request);
+        $record->method         = getMethod($request);
+        $record->params         = getApiParams($request);
+        $record->agent          = $request->header('user-agent');
+        $record->server_ip      = getServerIp();
+        $record->server_port    = getServerPort();
+        $record->client_ip      = getClientIp();
+        $record->content_type   = $request->header('Content-Type');
+        $record->cookie         = $request->header('Cookie');
+
+        config('clog.enable') && $this->mlogger->info('request', (array)$record);
+    }
+}
