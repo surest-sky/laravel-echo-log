@@ -17,7 +17,7 @@
             "src/helper.php"
         ]
     },
-    "minimum-stability": "v2.0",
+    "minimum-stability": "beta",
     "require": {},
     "extra": {
         "laravel": {
