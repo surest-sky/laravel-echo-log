@@ -68,7 +68,7 @@ if (!function_exists("getApiParams")) {
         $params = $request->all();
 
         // 运行在 CLI 模式下把 $argv 也放进参数中
-        if (isRunInCliMode()) {
+        if (!isRunInCliMode()) {
             $params['argv'] = $_SERVER["argv"];
         }
 
