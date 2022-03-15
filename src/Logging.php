@@ -74,13 +74,13 @@ class Logging
     public static function getCLogger($name = 'default') :Logger
     {
         $clog = config('clog');
-        $name = is_cli() ? "cli-{$name}" : $name;
+        $name = isRunInCliMode() ? "cli-{$name}" : $name;
         $prefix = Arr::get($clog, 'prefix', 'z-');
         $logger = self::getMlogger($name,
             null,
-            Arr::get($clog, 'maxFiles'),
+            Arr::get($clog, 'maxFiles', 10),
             "$prefix{filename}-{date}",
-            Arr::get($clog, 'maxFiles')
+            Arr::get($clog, 'maxFiles', 10)
         );
         return $logger;
     }
