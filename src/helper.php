@@ -36,7 +36,7 @@ if (!function_exists("getTargetUrl")) {
 
         // 运行在命令行模式下，则为脚本命令行参数的第一个值，但有可能是 swoole
         if ((0 === strcmp($target_url, "http://:")) && isRunInCliMode()) {
-            $target_url = implode(" ", $_SERVER["argv"]);
+            $target_url = implode(" ", $_SERVER["argv"] ?? []);
         }
 
         return $target_url;
@@ -69,7 +69,7 @@ if (!function_exists("getApiParams")) {
 
         // 运行在 CLI 模式下把 $argv 也放进参数中
         if (!isRunInCliMode()) {
-            $params['argv'] = $_SERVER["argv"];
+            $params['argv'] = $_SERVER["argv"] ?? [];
         }
 
         return $params;
@@ -268,10 +268,11 @@ if (!function_exists("ExectionReport")) {
     }
 }
 
+
 if (!function_exists('getLoggerFile')) {
     function getLoggerFile($name)
     {
-        $name = is_cli() ? "cli-{$name}" : $name;
+        $name = isRunInCliMode() ? "cli-{$name}" : $name;
         $clog = config('clog');
         $prefix = Arr::get($clog, 'prefix', 'biz-');
         $name = $prefix . $name;
